@@ -29,6 +29,7 @@ int pop(struct stack * s, double * output);
 // global functions
 struct stack * createNewStack();
 void printStack(struct stack * s);
+double stringToDouble(char * string);
 
 // calculator functions
 int asmd(struct stack * s, int opertion);
