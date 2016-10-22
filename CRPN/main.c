@@ -35,12 +35,6 @@ int main(void) {
   push(mainStack, 0.3300);
   printStack(mainStack);
 
-  printf("%f\n", stringToDouble("2.22"));
-  printf("%f\n", stringToDouble("100"));
-  printf("%f\n", stringToDouble("999.666"));
-  printf("%f\n", stringToDouble("0"));
-  getch();
-
   do {
     charin = getch();
 
@@ -67,7 +61,7 @@ int main(void) {
     case ' ': push(mainStack, 6.66); break;
     case '\b': pop(mainStack, &trash); break;
     case 13:
-      if (strlen(input) == 0) {
+      if (!strcmp(input, "")) {
         peek(mainStack, &trash);
         push(mainStack, trash);
         break;
