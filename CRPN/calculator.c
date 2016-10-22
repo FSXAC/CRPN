@@ -23,6 +23,10 @@ int asmd(struct stack * s, int opertion) {
     case 3:
       push(s, b / a);
       break;
+    case 4: // swap
+      push(s, a);
+      push(s, b);
+      break;
     default:
       break;
     }

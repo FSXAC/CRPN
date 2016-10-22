@@ -40,6 +40,7 @@ int main(void) {
     case ' ': push(mainStack, 6.66); break;
     case '\b': pop(mainStack, &trash); break;
     case 13: peek(mainStack, &trash); push(mainStack, trash); break;
+    case -32: asmd(mainStack, 4); break;
     default: break;
     }
 
