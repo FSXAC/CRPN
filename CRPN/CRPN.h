@@ -23,9 +23,12 @@ void initialize(struct stack * s);
 int isStackEmpty(struct stack * s);
 int isStackFull(struct stack * s);
 int push(struct stack * s, double value);
-int peek(struct stack * s);
-int pop(struct stack * s);
+int peek(struct stack * s, double * output);
+int pop(struct stack * s, double * output);
 
 // global functions
 struct stack * createNewStack();
 void printStack(struct stack * s);
+
+// calculator functions
+int asmd(struct stack * s, int opertion);

@@ -39,21 +39,24 @@ int push(struct stack * s, double value) {
 // PARAM: stack * s - the stack to check
 // RETURN: the value of the last item from stack
 //         return NULL if stack is empty
-int peek(struct stack * s) {
+int peek(struct stack * s, double * output) {
   // checking if the stack is empty first
-  if (!isStackEmpty(s)) return s->list[s->topIndex];
-  else return NULL;
+  if (!isStackEmpty(s)) {
+    *(output) = s->list[s->topIndex];
+    return TRUE;
+  }
+  else return FALSE;
 }
 
 // get the last value from stack AND delete it
 // PARAM: stack * s - the stack to check
+// PARAM: double * output - the output of the last item on top
 // RETURN: the value of the last item from stack
 //         return NULL if stack is empty
-int pop(struct stack * s) {
-  int value = peek(s);
+int pop(struct stack * s, double * output) {
+  int value = peek(s, output);
 
   // if the stack is empty, then decrease topindex by 1
-  if (value != NULL) s->topIndex--;
-
+  if (value) s->topIndex--;
   return value;
 }
