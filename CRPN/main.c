@@ -13,7 +13,7 @@ struct stack * mainStack;
 int main(void) {
   // current character input
   char charin;
-  double * trash;
+  double trash;
 
   // first initialize the main stack
   mainStack = createNewStack();
@@ -39,7 +39,7 @@ int main(void) {
     case '/': asmd(mainStack, 3); break;
     case ' ': push(mainStack, 6.66); break;
     case '\b': pop(mainStack, &trash); break;
-    case '\n': peek(mainStack, &trash); push(mainStack, *trash); break;
+    case 13: peek(mainStack, &trash); push(mainStack, trash); break;
     default: break;
     }
 
