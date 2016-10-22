@@ -23,7 +23,7 @@ int isStackFull(struct stack * s) {
 
 // push / insert an item into the stack, LIFO
 // PARAM: stack * s - the stack to add to
-// PARAM: float value - the value to add
+// PARAM: double value - the value to add
 // RETURN: 1 for success, 0 for exception
 int push(struct stack * s, double value) {
   // check if the stack is full

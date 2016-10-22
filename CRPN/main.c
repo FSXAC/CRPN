@@ -11,15 +11,17 @@ struct stack * mainStack;
 
 // main function
 int main(void) {
+  double a = 123.456;
   // first initialize the main stack
   mainStack = createNewStack();
   initialize(mainStack);
 
   // test
-  push(mainStack, 1.55);
+  push(mainStack, a);
   push(mainStack, 2.56);
   printStack(mainStack);
 
+  getch();
   return 0;
 }
 

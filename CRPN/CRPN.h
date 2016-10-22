@@ -22,7 +22,7 @@ struct stack {
 void initialize(struct stack * s);
 int isStackEmpty(struct stack * s);
 int isStackFull(struct stack * s);
-int push(struct stack * s, float value);
+int push(struct stack * s, double value);
 int peek(struct stack * s);
 int pop(struct stack * s);
 
