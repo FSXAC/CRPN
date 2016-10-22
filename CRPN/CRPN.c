@@ -1,33 +1,35 @@
+#include "CRPN.h"
+
 // Initialize a stack instance
 // PARAM: stack * s - the stack to initialize
 void initialize(struct stack * s) {
-  stack->topIndex = -1;
-  stack->list = (float *)calloc(sizeof(float) * MAX_HOLD);
+  s->topIndex = -1;
+  s->list = (double *)malloc(sizeof(double) * MAX_HOLD);
 }
 
 // Checks if a stack is empty
 // PARAM: stack * s - the stack to check
 // RETURN: 1 - empty, 0 - not empty
 int isStackEmpty(struct stack * s) {
-  return (stack->topIndex == -1);
+  return (s->topIndex == -1);
 }
 
 // Checks if a stack is full
 // PARAM: stack * s - the stack to check
 // RETURN: 1 - full, 0 - not full
 int isStackFull(struct stack * s) {
-  return (stack->topIndex == MAX_HOLD-1);
+  return (s->topIndex == MAX_HOLD-1);
 }
 
 // push / insert an item into the stack, LIFO
 // PARAM: stack * s - the stack to add to
 // PARAM: float value - the value to add
 // RETURN: 1 for success, 0 for exception
-int push(struct stack * s, float value) {
+int push(struct stack * s, double value) {
   // check if the stack is full
   if (!isStackFull(s)) {
-    stack->topIndex++;
-    stack->list[stack->topIndex] = value;
+    s->topIndex++;
+    s->list[s->topIndex] = value;
     return TRUE;
   } else return FALSE;
 }
@@ -38,7 +40,7 @@ int push(struct stack * s, float value) {
 //         return NULL if stack is empty
 int peek(struct stack * s) {
   // checking if the stack is empty first
-  if (!isStackEmpty(s)) return stack->list[stack->topIndex];
+  if (!isStackEmpty(s)) return s->list[s->topIndex];
   else return NULL;
 }
 

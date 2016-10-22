@@ -1,16 +1,31 @@
+// header files
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+// preprocessors
+#define TRUE 1
+#define FALSE 0
+
 // global constants
-const int MAX_HOLD = 10;
+#define MAX_HOLD 10
 
 // stack type
 struct stack {
   int topIndex;
-  float * list;
-}
+  double * list;
+};
 
 // function prototypes
-void initialize(stack * s);
-int isStackEmpty(stack * s);
-int isStackFull(stack * s);
-int push(stack * s, float value);
-int peek(stack * s);
-int pop(stack * s);
+// struct stack
+void initialize(struct stack * s);
+int isStackEmpty(struct stack * s);
+int isStackFull(struct stack * s);
+int push(struct stack * s, float value);
+int peek(struct stack * s);
+int pop(struct stack * s);
+
+// global functions
+struct stack * createNewStack();
+void printStack(struct stack * s);
