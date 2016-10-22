@@ -4,7 +4,8 @@
 // PARAM: stack * s - the stack to initialize
 void initialize(struct stack * s) {
   s->topIndex = -1;
-  s->list = (double *)malloc(sizeof(double) * MAX_HOLD);
+  // s->list = (double *)malloc(sizeof(double) * MAX_HOLD);
+  s->list = (double *)calloc(MAX_HOLD, sizeof(double));
 }
 
 // Checks if a stack is empty
