@@ -14,6 +14,7 @@ int main(void) {
   // current character input
   char charin;
   char * input = (char *)malloc(sizeof(char)* 80);
+  char * history = (char *)malloc(sizeof(char)* 200);
   int inputPos = 0;
 
   // temporary storage
@@ -49,7 +50,7 @@ int main(void) {
     case '6':
     case '7':
     case '8':
-    case '9': 
+    case '9':
     case '.':
       input[inputPos++] = charin;
       input[inputPos] = '\0';
@@ -59,14 +60,22 @@ int main(void) {
     case '*': asmd(mainStack, 2); break;
     case '/': asmd(mainStack, 3); break;
     case ' ': push(mainStack, 6.66); break;
-    case '\b': pop(mainStack, &trash); break;
+    case '\b':
+      if (strlen(input) == 0) {
+        pop(mainStack, &trash);
+      }
+      else {
+        input[inputPos--] = '\0';
+      }
+      break;
     case 13:
       if (!strcmp(input, "")) {
         peek(mainStack, &trash);
         push(mainStack, trash);
         break;
       } else {
-        inputToStack = stringToDouble(input);
+        /*inputToStack = stringToDouble(input);*/
+        sscanf_s(input, "%lf", &inputToStack);
         push(mainStack, inputToStack);
         input = "";
         inputPos = 0;
@@ -77,6 +86,7 @@ int main(void) {
     }
 
     // display
+    printf("%s\n\n", history);
     printStack(mainStack);
     printf("%s", input);
   } while (charin != 'q');

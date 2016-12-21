@@ -1,0 +1,25 @@
+C:\Users\mansu\OneDrive\Documents\Programming\C\CRPN\CRPN\main.c: In function 'main':
+C:\Users\mansu\OneDrive\Documents\Programming\C\CRPN\CRPN\main.c:40:14: warning: implicit declaration of function 'getch' [-Wimplicit-function-declaration]
+     charin = getch();
+              ^
+C:\Users\mansu\OneDrive\Documents\Programming\C\CRPN\CRPN\main.c:78:9: warning: implicit declaration of function 'sscanf_s' [-Wimplicit-function-declaration]
+         sscanf_s(input, "%lf", &inputToStack);
+         ^
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x49): undefined reference to `initialize'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x60): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x77): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x8e): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0xa5): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0xbc): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0xd3): more undefined references to `push' follow
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x144): undefined reference to `asmd'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x15e): undefined reference to `asmd'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x178): undefined reference to `asmd'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x192): undefined reference to `asmd'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x1ae): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x1d3): undefined reference to `pop'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x213): undefined reference to `peek'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x228): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x25b): undefined reference to `push'
+C:\Users\mansu\AppData\Local\Temp\ccgcsa3R.o:main.c:(.text+0x282): undefined reference to `asmd'
+collect2.exe: error: ld returned 1 exit status
