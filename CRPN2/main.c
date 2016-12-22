@@ -24,7 +24,7 @@ typedef struct {
 // initialize an empty stack
 void initialize(stack *s) {
   s->topIndex = -1;
-  s->list = (double *)malloc(sizeof(double) * MAX_HOLD);
+  s->list = (double *)malloc(sizeof(double) * MAX_SIZE);
 }
 
 // check if a stack is empty
@@ -64,3 +64,28 @@ int pop(stack *s, double *output) {
 }
 
 // ***** OPERATION functions
+// create new stack
+stack * createNewStack() {
+  stack *newStack = (stack *)malloc(sizeof(stack));
+  return newStack;
+}
+
+// print stack in a user friendly way
+void printStack(stack * s) {
+  int i = 0;
+  double value_i;
+  system("cls");
+  for (; i < MAX_SIZE; i++) {
+    value_i = s->list[i - (MAX_SIZE - s->topIndex - 1)];
+    printf("%d: ", MAX_SIZE - i);
+    if (MAX_SIZE - i - 1 <= s->topIndex)
+      printf("%.4f\n", value_i);
+    else
+      printf("\n");
+  }
+}
+
+// parse string into double
+void stringToDouble(char *string, double *value) {
+  sscanf_s(string, "%f", value);
+}
