@@ -136,10 +136,6 @@ int main(void) {
   // initialize main stack
   stack *mainStack = createNewStack();
   initialize(mainStack);
-
-  // test
-  push(mainStack, 2);
-  push(mainStack, 5);
   printStack(mainStack);
 
   // get user input functions
@@ -162,7 +158,7 @@ int main(void) {
         // backspace
         case 8:
           if (inputPos == 0) pop(mainStack, &trash);
-          else inputBuffer[inputPos--] = '\0';
+          else inputBuffer[--inputPos] = '\0';
           break;
 
         // arrow keys
