@@ -1,6 +1,7 @@
 // header import files
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include <math.h>
 
 // preprocessors
@@ -87,5 +88,113 @@ void printStack(stack * s) {
 
 // parse string into double
 void stringToDouble(char *string, double *value) {
-  sscanf_s(string, "%f", value);
+  sscanf_s(string, "%lf", value);
+}
+
+// ***** CALCULATOR FUNCTIONS
+int elementaryBinaryFunc(stack *s, int opcode) {
+  double a, b;
+
+  // check that there's at least 2 elements in stack
+  if (s->topIndex >= 1) {
+    pop(s, &a);
+    pop(s, &b);
+    switch (opcode) {
+      case 0: push(s, b + a); break;
+      case 1: push(s, b - a); break;
+      case 2: push(s, b * a); break;
+      case 3: push(s, b / a); break;
+      case 4:
+        push(s, a);
+        push(s, b);
+        break;
+      default: break;
+    }
+    return TRUE;
+  } else return FALSE;
+}
+
+int add(stack *s) {return elementaryBinaryFunc(s, 0);}
+int minus(stack *s) {return elementaryBinaryFunc(s, 1);}
+int mult(stack *s) {return elementaryBinaryFunc(s, 2);}
+int divi(stack *s) {return elementaryBinaryFunc(s, 3);}
+int swap(stack *s) {return elementaryBinaryFunc(s, 4);}
+
+// ***** main function
+int main(void) {
+  // get characrter input
+  char input;
+  char *inputBuffer = NULL;
+  int inputPos = 0;
+
+  // to stack
+  double valueToStack;
+
+  // temporary value
+  double trash;
+
+  // initialize main stack
+  stack *mainStack = createNewStack();
+  initialize(mainStack);
+
+  // test
+  push(mainStack, 2);
+  push(mainStack, 5);
+  printStack(mainStack);
+
+  // get user input functions
+  do {
+    input = _getch();
+
+    // look for type of input (number or function)
+    if ((input >= '0' && input <= '9') || input == '.') {
+      inputBuffer[inputPos++] = input;
+      inputBuffer[inputPos]   = '\0';
+    } else {
+      // functions
+      switch(input) {
+        // add, sub, mult, div
+        case '+': add(mainStack); break;
+        case '-': minus(mainStack); break;
+        case '*': mult(mainStack); break;
+        case '/': divi(mainStack); break;
+
+        // backspace
+        case 8:
+          if (inputPos == 0) pop(mainStack, &trash);
+          else inputBuffer[inputPos--] = '\0';
+          break;
+
+        // arrow keys
+        case -32:
+          switch(_getch()) {
+
+            // swap
+            case 77:
+              swap(mainStack); break;
+            default: break;
+          }
+          break;
+
+        // enter
+        case 13:
+          // check for valid items to push
+          if (inputPos != 0) {
+            stringToDouble(inputBuffer, &valueToStack);
+            push(mainStack, valueToStack);
+            inputBuffer = "";
+            inputPos    = 0;
+          }
+          break;
+
+        default: break;
+      }
+    }
+
+    // display
+    printStack(mainStack);
+    printf("%s", inputBuffer);
+  } while (input != 'q');
+
+  return 0;
 }
