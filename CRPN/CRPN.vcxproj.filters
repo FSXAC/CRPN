@@ -15,19 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
+    <ClCompile Include="..\CRPN2\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CRPN.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="calculator.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CRPN.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

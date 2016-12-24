@@ -124,7 +124,7 @@ int swap(stack *s) {return elementaryBinaryFunc(s, 4);}
 int main(void) {
   // get characrter input
   char input;
-  char *inputBuffer = NULL;
+  char *inputBuffer = (char *)malloc(sizeof(char) * 80);
   int inputPos = 0;
 
   // to stack
@@ -182,19 +182,20 @@ int main(void) {
           if (inputPos != 0) {
             stringToDouble(inputBuffer, &valueToStack);
             push(mainStack, valueToStack);
-            inputBuffer = "";
-            inputPos    = 0;
+
+            // reset input buffer
+            inputBuffer[0] = '\0';
+            inputPos       = 0;
           }
           break;
-
-        default: break;
+        default: printf("invalid input\n"); break;
       }
     }
 
     // display
     printStack(mainStack);
     printf("%s", inputBuffer);
-  } while (input != 'q');
+  } while (1);
 
   return 0;
 }
