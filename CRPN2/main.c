@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <math.h>
+#include <string.h>
 
 // preprocessors
 #define TRUE  1
@@ -72,7 +73,7 @@ stack * createNewStack() {
 }
 
 // print stack in a user friendly way
-void printStack(stack * s) {
+void printStack(stack *s, char *ib) {
   int i = 0;
   double value_i;
   system("cls");
@@ -84,6 +85,7 @@ void printStack(stack * s) {
     else
       printf("\n");
   }
+  printf("> %s", ib);
 }
 
 // parse string into double
@@ -132,12 +134,23 @@ void clearStack(stack *s) {
   double trash;
   while (s->topIndex != -1) pop(s, &trash);
 }
+int inputFunction(stack *s, char *f) {
+  int valid = 1;
+  if (!strcmp(f, "SIN")) trigFunc(s, 0);
+  else if (!strcmp(f, "COS")) trigFunc(s, 1);
+  else if (!strcmp(f, "TAN")) trigFunc(s, 2);
+  else if (!strcmp(f, "ACOS")) trigFunc(s, 3);
+  else if (!strcmp(f, "ASIN")) trigFunc(s, 4);
+  else if (!strcmp(f, "ATAN")) trigFunc(s, 5);
+  else valid = 0;
+  return valid;
+}
 
 // ***** main function
 int main(void) {
   // get characrter input
   char input;
-  char *inputBuffer = (char *)malloc(sizeof(char) * 80);
+  char *inputBuffer = (char *)calloc(80, sizeof(char));
   int inputPos = 0;
 
   // to stack
@@ -152,7 +165,7 @@ int main(void) {
   // initialize main stack
   stack *mainStack = createNewStack();
   initialize(mainStack);
-  printStack(mainStack);
+  printStack(mainStack, inputBuffer);
 
   // get user input functions
   do {
@@ -185,15 +198,18 @@ int main(void) {
           if (inputPos != 0 && !isFuncInput) {
             // check for valid items to push
             stringToDouble(inputBuffer, &valueToStack);
-
-            // reset input buffer
-            inputBuffer[0] = '\0';
-            inputPos       = 0;
+            push(mainStack, valueToStack);
+          } else if (isFuncInput) {
+            // check and run function subroutine
+            inputFunction(mainStack, inputBuffer);
           } else {
             // duplicate bottom stack
             peek(mainStack, &valueToStack);
+            push(mainStack, valueToStack);
           }
-          push(mainStack, valueToStack);
+          // reset input buffer
+          inputBuffer[0] = '\0';
+          inputPos       = 0;
           break;
 
         // esc - clear stack
@@ -206,14 +222,18 @@ int main(void) {
             default: break;
           }
           break;
-        default: printf("invalid input\n"); break;
+        default:
+          // reset input buffer
+          inputBuffer[0] = '\0';
+          inputPos       = 0;
+          printf("\ninvalid input\n");
+          break;
       }
     }
 
     // display
-    printStack(mainStack);
-    printf("%s", inputBuffer);
-  } while (1);
+    printStack(mainStack, inputBuffer);
+  } while (input != 'q');
 
   return 0;
 }
