@@ -93,10 +93,9 @@ void stringToDouble(char *string, double *value) {
 
 // ***** CALCULATOR FUNCTIONS
 int elementaryBinaryFunc(stack *s, int opcode) {
-  double a, b;
-
-  // check that there's at least 2 elements in stack
   if (s->topIndex >= 1) {
+    // there's at least 2 elements in stack
+    double a, b;
     pop(s, &a);
     pop(s, &b);
     switch (opcode) {
@@ -113,11 +112,22 @@ int elementaryBinaryFunc(stack *s, int opcode) {
     return TRUE;
   } else return FALSE;
 }
-int add(stack *s) {return elementaryBinaryFunc(s, 0);}
-int minus(stack *s) {return elementaryBinaryFunc(s, 1);}
-int mult(stack *s) {return elementaryBinaryFunc(s, 2);}
-int divi(stack *s) {return elementaryBinaryFunc(s, 3);}
-int swap(stack *s) {return elementaryBinaryFunc(s, 4);}
+int trigFunc(stack *s, int opcode) {
+  if (s->topIndex >= 0) {
+    double x;
+    pop(s, &x);
+    switch(opcode) {
+      case 0: push(s, sin(x)); break;
+      case 1: push(s, cos(x)); break;
+      case 2: push(s, tan(x)); break;
+      case 3: push(s, asin(x)); break;
+      case 4: push(s, acos(x)); break;
+      case 5: push(s, atan(x)); break;
+      default: break;
+    }
+    return TRUE;
+  } else return FALSE;
+}
 void clearStack(stack *s) {
   double trash;
   while (s->topIndex != -1) pop(s, &trash);
@@ -153,10 +163,10 @@ int main(void) {
       // functions
       switch(input) {
         // add, sub, mult, div
-        case '+': add(mainStack); break;
-        case '-': minus(mainStack); break;
-        case '*': mult(mainStack); break;
-        case '/': divi(mainStack); break;
+        case '+': elementaryBinaryFunc(mainStack, 0); break;
+        case '-': elementaryBinaryFunc(mainStack, 1); break;
+        case '*': elementaryBinaryFunc(mainStack, 2); break;
+        case '/': elementaryBinaryFunc(mainStack, 3); break;
 
         // backspace
         case 8:
@@ -186,10 +196,7 @@ int main(void) {
         // arrow keys
         case -32:
           switch(_getch()) {
-
-            // swap
-            case 77:
-              swap(mainStack); break;
+            case 77: elementaryBinaryFunc(mainStack, 4); break;
             default: break;
           }
           break;
