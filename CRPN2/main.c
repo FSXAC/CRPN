@@ -146,6 +146,9 @@ int main(void) {
   // temporary value
   double trash;
 
+  // flag for function input
+  int isFuncInput = 0;
+
   // initialize main stack
   stack *mainStack = createNewStack();
   initialize(mainStack);
@@ -156,9 +159,12 @@ int main(void) {
     input = _getch();
 
     // look for type of input (number or function)
-    if ((input >= '0' && input <= '9') || input == '.') {
+    if ((input >= '0' && input <= '9') ||
+         input == '.'                  ||
+         (input >= 'A' && input <= 'Z')) {
       inputBuffer[inputPos++] = input;
       inputBuffer[inputPos]   = '\0';
+      if (input >= 'A' && input <= 'Z') isFuncInput = 1;
     } else {
       // functions
       switch(input) {
@@ -176,7 +182,7 @@ int main(void) {
 
         // enter
         case 13:
-          if (inputPos != 0) {
+          if (inputPos != 0 && !isFuncInput) {
             // check for valid items to push
             stringToDouble(inputBuffer, &valueToStack);
 
