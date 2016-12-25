@@ -113,12 +113,15 @@ int elementaryBinaryFunc(stack *s, int opcode) {
     return TRUE;
   } else return FALSE;
 }
-
 int add(stack *s) {return elementaryBinaryFunc(s, 0);}
 int minus(stack *s) {return elementaryBinaryFunc(s, 1);}
 int mult(stack *s) {return elementaryBinaryFunc(s, 2);}
 int divi(stack *s) {return elementaryBinaryFunc(s, 3);}
 int swap(stack *s) {return elementaryBinaryFunc(s, 4);}
+void clearStack(stack *s) {
+  double trash;
+  while (s->topIndex != -1) pop(s, &trash);
+}
 
 // ***** main function
 int main(void) {
@@ -161,6 +164,25 @@ int main(void) {
           else inputBuffer[--inputPos] = '\0';
           break;
 
+        // enter
+        case 13:
+          if (inputPos != 0) {
+            // check for valid items to push
+            stringToDouble(inputBuffer, &valueToStack);
+
+            // reset input buffer
+            inputBuffer[0] = '\0';
+            inputPos       = 0;
+          } else {
+            // duplicate bottom stack
+            peek(mainStack, &valueToStack);
+          }
+          push(mainStack, valueToStack);
+          break;
+
+        // esc - clear stack
+        case 27: clearStack(mainStack); break;
+
         // arrow keys
         case -32:
           switch(_getch()) {
@@ -169,19 +191,6 @@ int main(void) {
             case 77:
               swap(mainStack); break;
             default: break;
-          }
-          break;
-
-        // enter
-        case 13:
-          // check for valid items to push
-          if (inputPos != 0) {
-            stringToDouble(inputBuffer, &valueToStack);
-            push(mainStack, valueToStack);
-
-            // reset input buffer
-            inputBuffer[0] = '\0';
-            inputPos       = 0;
           }
           break;
         default: printf("invalid input\n"); break;
