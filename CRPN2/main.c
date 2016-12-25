@@ -9,6 +9,8 @@
 #define TRUE  1
 #define FALSE 0
 
+#define INPUT_BUFFER_SIZE 80
+
 // stack definition - representation using linked list
 // struct node {
 //   double value;
@@ -150,7 +152,7 @@ int inputFunction(stack *s, char *f) {
 int main(void) {
   // get characrter input
   char input;
-  char *inputBuffer = (char *)calloc(80, sizeof(char));
+  char *inputBuffer = (char *)calloc(INPUT_BUFFER_SIZE, sizeof(char));
   int inputPos = 0;
 
   // to stack
@@ -195,13 +197,14 @@ int main(void) {
 
         // enter
         case 13:
+          // check for valid items to push
           if (inputPos != 0 && !isFuncInput) {
-            // check for valid items to push
             stringToDouble(inputBuffer, &valueToStack);
             push(mainStack, valueToStack);
           } else if (isFuncInput) {
             // check and run function subroutine
             inputFunction(mainStack, inputBuffer);
+            isFuncInput = 0;
           } else {
             // duplicate bottom stack
             peek(mainStack, &valueToStack);
@@ -224,8 +227,8 @@ int main(void) {
           break;
         default:
           // reset input buffer
-          inputBuffer[0] = '\0';
-          inputPos       = 0;
+          memset(inputBuffer, 0, sizeof(char) * INPUT_BUFFER_SIZE);
+          inputPos = 0;
           printf("\ninvalid input\n");
           break;
       }
