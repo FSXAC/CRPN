@@ -225,6 +225,11 @@ int main(void) {
             default: break;
           }
           break;
+
+        // constants
+        case 'p': push(mainStack, 3.141592653589793238); break;
+        case 'e': push(mainStack, 2.7182818284); break;
+
         default:
           // reset input buffer
           memset(inputBuffer, 0, sizeof(char) * INPUT_BUFFER_SIZE);
